@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CEllipse", "CEllipse.csproj", "{EB31E908-B0F0-4DF4-952E-4908F395A9B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB31E908-B0F0-4DF4-952E-4908F395A9B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB31E908-B0F0-4DF4-952E-4908F395A9B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB31E908-B0F0-4DF4-952E-4908F395A9B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB31E908-B0F0-4DF4-952E-4908F395A9B5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6DA4A0B5-5228-4B2D-8B2A-21C6549CCBE8}
+	EndGlobalSection
+EndGlobal
