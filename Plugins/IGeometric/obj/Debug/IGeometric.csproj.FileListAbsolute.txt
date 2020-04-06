@@ -1,0 +1,5 @@
+D:\Prog\ООП\Plugins\IGeometric\bin\Debug\IGeometric.dll
+D:\Prog\ООП\Plugins\IGeometric\bin\Debug\IGeometric.pdb
+D:\Prog\ООП\Plugins\IGeometric\obj\Debug\IGeometric.csproj.CoreCompileInputs.cache
+D:\Prog\ООП\Plugins\IGeometric\obj\Debug\IGeometric.dll
+D:\Prog\ООП\Plugins\IGeometric\obj\Debug\IGeometric.pdb
