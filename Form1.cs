@@ -23,7 +23,7 @@ namespace ООП_1
             public void Save()
             {
                 BinaryFormatter formatter = new BinaryFormatter();
-                using (FileStream fs = new FileStream(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Geometrics.dat"), FileMode.OpenOrCreate))
+                using (FileStream fs = new FileStream(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Geometrics.dat"), FileMode.Create))
                 {
                     foreach (Geometric elem in Glist)
                     {
@@ -129,7 +129,8 @@ namespace ООП_1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = null;
+            pictureBox1.CreateGraphics().FillRectangle(new SolidBrush(Color.White), 1, 1, pictureBox1.Width - 1, pictureBox1.Height - 1);
+            GS.Glist.Clear();
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -151,9 +152,7 @@ namespace ООП_1
         {
             if (mouseFl)
             {
-                SolidBrush brush = new SolidBrush(Color.White);
-                Graphics graph = pictureBox1.CreateGraphics();
-                graph.FillRectangle(brush, 1, 1, pictureBox1.Width-1, pictureBox1.Height-1);
+                pictureBox1.CreateGraphics().FillRectangle(new SolidBrush(Color.White), 1, 1, pictureBox1.Width-1, pictureBox1.Height-1);
                 
                 foreach (Geometric elem in GS.Glist)
                     elem.Draw(pictureBox1);
@@ -173,6 +172,19 @@ namespace ООП_1
         private void button7_Click(object sender, EventArgs e)
         {
             RefreshPlugins();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (GS.Glist.Count > 0)
+            {
+                GS.Glist.RemoveAt(GS.Glist.Count - 1);
+                pictureBox1.CreateGraphics().FillRectangle(new SolidBrush(Color.White), 1, 1, pictureBox1.Width - 1, pictureBox1.Height - 1);
+                foreach (Geometric elem in GS.Glist)
+                    elem.Draw(pictureBox1);
+            }
+            else
+                MessageBox.Show("А шо удалять-то?");
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
