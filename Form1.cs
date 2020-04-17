@@ -7,6 +7,9 @@ using IGeometric;
 using CGeometric;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Drawing;
+using System.Linq.Expressions;
+using System.Runtime.Serialization;
+using System.Linq;
 
 namespace ООП_1
 {
@@ -16,6 +19,44 @@ namespace ООП_1
         public class GeometricSerializer
         {
             public List<Geometric> Glist = new List<Geometric>();
+
+            public void Save()
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                using (FileStream fs = new FileStream(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Geometrics.dat"), FileMode.OpenOrCreate))
+                {
+                    foreach (Geometric elem in Glist)
+                    {
+                        formatter.Serialize(fs, elem);
+                    }
+                    MessageBox.Show("Успешно сохранено!");
+                }
+                Glist.Clear();
+            }
+            public void Load()
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                using (FileStream fs = new FileStream(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Geometrics.dat"), FileMode.OpenOrCreate))
+                {
+                    bool suc = true;
+                    while (fs.Position<fs.Length)
+                    {
+                        try
+                        {
+                            Geometric elem = (Geometric)formatter.Deserialize(fs, null);
+                            Glist.Add(elem);
+                        }
+                        catch (SerializationException)
+                        {
+                            MessageBox.Show("Похоже, одной из фигур больше нет в списке плагинов.");
+                            suc = false;
+                            break;
+                        }
+                    }
+                    if (suc)
+                        MessageBox.Show("Успешно загружено!");
+                }
+            }
         }
 
         internal int mx, my;
@@ -38,15 +79,30 @@ namespace ООП_1
             if (!pluginDirectory.Exists)
                 pluginDirectory.Create();
             string[] pluginFiles = Directory.GetFiles(pluginPath, "*.dll");
+            bool fl = true;
             foreach (string file in pluginFiles)
             {
                 Assembly asm = Assembly.LoadFrom(file);
-                var types = asm.GetTypes();
-                foreach (Type type in types)
+                try
                 {
-                    var plugin = asm.CreateInstance(type.FullName) as GeometricInterface;
-                    GIlist.Add(plugin);
-                    comboBox1.Items.Add(type.Name);
+                    var types = asm.GetTypes().
+                                Where(t => t.GetInterfaces().
+                                Where(i => i.FullName == typeof(GeometricInterface).FullName).Any());
+                    foreach (Type type in types)
+                    {
+                        var plugin = asm.CreateInstance(type.FullName) as GeometricInterface;
+                        GIlist.Add(plugin);
+                        comboBox1.Items.Add(type.Name);
+                    }
+                }
+                catch (ReflectionTypeLoadException ex)
+                {
+                    if (fl)
+                    {
+                        string mes = ex.LoaderExceptions[0].Message;
+                        MessageBox.Show("Ого! Похоже, вам не хватает плагина "+ mes.Substring(mes.IndexOf('"'), mes.IndexOf(',')-mes.IndexOf('"')) +"\".");
+                        fl = false;
+                    }
                 }
             }
         }
@@ -77,22 +133,11 @@ namespace ООП_1
         }
         private void button5_Click(object sender, EventArgs e)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream fs = new FileStream(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Geometrics.dat"), FileMode.OpenOrCreate))
-            {
-                formatter.Serialize(fs, GS);
-                MessageBox.Show("Успешно сохранено!");
-            }
-            GS.Glist.Clear();
+            GS.Save();
         }
         private void button6_Click(object sender, EventArgs e)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            using (FileStream fs = new FileStream(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Geometrics.dat"), FileMode.OpenOrCreate))
-            {
-                GS = (GeometricSerializer)formatter.Deserialize(fs, null);
-                MessageBox.Show("Успешно загружено!");
-            }
+            GS.Load();
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -123,6 +168,11 @@ namespace ООП_1
                     }
                 }
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            RefreshPlugins();
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
