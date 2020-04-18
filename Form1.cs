@@ -7,7 +7,6 @@ using IGeometric;
 using CGeometric;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Drawing;
-using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Linq;
 
@@ -90,9 +89,16 @@ namespace ООП_1
                                 Where(i => i.FullName == typeof(GeometricInterface).FullName).Any());
                     foreach (Type type in types)
                     {
-                        var plugin = asm.CreateInstance(type.FullName) as GeometricInterface;
-                        GIlist.Add(plugin);
-                        comboBox1.Items.Add(type.Name);
+                        try
+                        {
+                            var plugin = asm.CreateInstance(type.FullName) as GeometricInterface;
+                            GIlist.Add(plugin);
+                            comboBox1.Items.Add(type.Name);
+                        }
+                        catch (MissingMethodException)
+                        {
+                            MessageBox.Show("Похоже, какой-то из плагинов не является фигурой. Извините...");
+                        }
                     }
                 }
                 catch (ReflectionTypeLoadException ex)
