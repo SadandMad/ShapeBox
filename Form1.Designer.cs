@@ -47,8 +47,8 @@ namespace ООП_1
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Cross;
@@ -65,6 +65,7 @@ namespace ООП_1
             // colorDialog2
             // 
             this.colorDialog2.Color = System.Drawing.Color.Transparent;
+            this.colorDialog2.CustomColors = new int[] {Color.Transparent.ToArgb()};
             // 
             // comboBox1
             // 

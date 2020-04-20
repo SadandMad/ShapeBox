@@ -3,4 +3,3 @@ D:\Prog\ООП\ShapeBox\Plugins\IGeometric\bin\Debug\IGeometric.dll
 D:\Prog\ООП\ShapeBox\Plugins\IGeometric\bin\Debug\IGeometric.pdb
 D:\Prog\ООП\ShapeBox\Plugins\IGeometric\obj\Debug\IGeometric.dll
 D:\Prog\ООП\ShapeBox\Plugins\IGeometric\obj\Debug\IGeometric.pdb
-D:\Prog\ООП\ShapeBox\Plugins\IGeometric\obj\Debug\IGeometric.csprojAssemblyReference.cache

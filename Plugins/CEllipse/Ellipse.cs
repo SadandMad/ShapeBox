@@ -37,8 +37,8 @@ namespace CEllipse
             Graphics elem = picture.CreateGraphics();
             Pen pen = new Pen(Pclr);
             SolidBrush brush = new SolidBrush(Fclr);
-            elem.DrawEllipse(pen, x1, y1, x2 - x1, y2 - y1);
             elem.FillEllipse(brush, x1, y1, x2 - x1, y2 - y1);
+            elem.DrawEllipse(pen, x1, y1, x2 - x1, y2 - y1);
         }
     }
 }
