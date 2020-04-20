@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using IGeometric;
-using CGeometric;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Drawing;
 using System.Runtime.Serialization;
@@ -61,7 +60,7 @@ namespace ООП_1
         internal int mx, my;
         internal readonly string pluginPath = System.String.Join("\\", new string[] { System.IO.Directory.GetCurrentDirectory(), "Plugins" });
         internal List<GeometricInterface> GIlist = new List<GeometricInterface>();
-        GeometricSerializer GS = new GeometricSerializer();
+        internal GeometricSerializer GS = new GeometricSerializer();
         internal bool mouseFl = false;
 
         public MainForm()
@@ -118,6 +117,7 @@ namespace ООП_1
             if (colorDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             button1.BackColor = colorDialog1.Color;
+            button1.ForeColor = Color.FromArgb(button1.BackColor.R > 127 ? 0 : 255, button1.BackColor.G > 127 ? 0 : 255, button1.BackColor.B > 127 ? 0 : 255);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -125,6 +125,7 @@ namespace ООП_1
             if (colorDialog2.ShowDialog() == DialogResult.Cancel)
                 return;
             button2.BackColor = colorDialog2.Color;
+            button2.ForeColor = Color.FromArgb(button2.BackColor.R > 127 ? 0 : 255, button2.BackColor.G > 127 ? 0 : 255, button2.BackColor.B > 127 ? 0 : 255);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -135,7 +136,7 @@ namespace ООП_1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            pictureBox1.CreateGraphics().FillRectangle(new SolidBrush(Color.White), 1, 1, pictureBox1.Width - 1, pictureBox1.Height - 1);
+            pictureBox1.CreateGraphics().FillRectangle(new SolidBrush(Color.White), 0, 0, pictureBox1.Width, pictureBox1.Height);
             GS.Glist.Clear();
         }
         private void button5_Click(object sender, EventArgs e)
@@ -158,7 +159,7 @@ namespace ООП_1
         {
             if (mouseFl)
             {
-                pictureBox1.CreateGraphics().FillRectangle(new SolidBrush(Color.White), 1, 1, pictureBox1.Width-1, pictureBox1.Height-1);
+                pictureBox1.CreateGraphics().FillRectangle(new SolidBrush(Color.White), 0, 0, pictureBox1.Width, pictureBox1.Height);
                 
                 foreach (Geometric elem in GS.Glist)
                     elem.Draw(pictureBox1);
@@ -185,7 +186,7 @@ namespace ООП_1
             if (GS.Glist.Count > 0)
             {
                 GS.Glist.RemoveAt(GS.Glist.Count - 1);
-                pictureBox1.CreateGraphics().FillRectangle(new SolidBrush(Color.White), 1, 1, pictureBox1.Width - 1, pictureBox1.Height - 1);
+                pictureBox1.CreateGraphics().FillRectangle(new SolidBrush(Color.White), 0, 0, pictureBox1.Width, pictureBox1.Height);
                 foreach (Geometric elem in GS.Glist)
                     elem.Draw(pictureBox1);
             }

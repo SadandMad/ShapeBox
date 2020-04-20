@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6468A27F-EE6F-454B-8E95-A9E5F1422D62}</ProjectGuid>
+    <ProjectGuid>{1D17CEA3-0F9C-4DD6-8109-4FF306FDE01C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CLine</RootNamespace>
@@ -31,8 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CGeometric">
-      <HintPath>..\Plugins\CGeometric\bin\Debug\CGeometric.dll</HintPath>
+    <Reference Include="IGeometric">
+      <HintPath>..\IGeometric\bin\Debug\IGeometric.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
